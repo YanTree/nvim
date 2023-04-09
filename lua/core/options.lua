@@ -1,130 +1,47 @@
-local global = require("core.global")
+local const = require("core.const")
+local indent = 8
 
 local function load_options()
-	local global_local = {
-		-- backupdir = global.cache_dir .. "backup/",
-		-- directory = global.cache_dir .. "swap/",
-		-- pumblend = 10,
-		-- spellfile = global.cache_dir .. "spell/en.uft-8.add",
-		-- viewdir = global.cache_dir .. "view/",
-		-- winblend = 10,
-		autoindent = true,
-		autoread = true,
-		autowrite = true,
-		backspace = "indent,eol,start",
-		backup = false,
-		backupskip = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim",
-		breakat = [[\ \	;:,!?]],
-		breakindentopt = "shift:2,min:20",
-		clipboard = "unnamedplus",
-		cmdheight = 2, -- 0, 1, 2
-		cmdwinheight = 5,
-		complete = ".,w,b,k",
-		completeopt = "menuone,noselect",
-		concealcursor = "niv",
-		conceallevel = 0,
-		cursorcolumn = true,
-		cursorline = true,
-		diffopt = "filler,iwhite,internal,algorithm:patience",
-		display = "lastline",
-		encoding = "utf-8",
-		equalalways = false,
-		errorbells = true,
-		expandtab = true,
-		fileformats = "unix,mac,dos",
-		foldenable = true,
-		foldlevelstart = 99,
-		formatoptions = "1jcroql",
-		grepformat = "%f:%l:%c:%m",
-		grepprg = "rg --hidden --vimgrep --smart-case --",
-		helpheight = 12,
-		hidden = true,
-		history = 2000,
-		ignorecase = true,
-		inccommand = "nosplit",
-		incsearch = true,
-		infercase = true,
-		jumpoptions = "stack",
-		laststatus = 2,
-		linebreak = true,
-		list = true,
-		listchars = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←",
-		magic = true,
-		mousescroll = "ver:3,hor:6",
-		number = true,
-		previewheight = 12,
-		pumheight = 15,
-		redrawtime = 1500,
-		relativenumber = true,
-		ruler = true,
-		scrolloff = 2,
-		sessionoptions = "curdir,help,tabpages,winsize",
-		shada = "!,'300,<50,@100,s10,h",
+	local global_options = {
+                smartindent = true,              -- 自动缩进
+                expandtab = true,                -- 使用空格替换 tab
+                tabstop = indent,                -- 一个 tab 使用多少个空格
+                
+
 		shiftround = true,
-		shiftwidth = 4,
-		shortmess = "aoOTIcF",
-		showbreak = "↳  ",
-		showcmd = false,
-		showmode = false,
-		showtabline = 2,
-		sidescrolloff = 5,
-		signcolumn = "yes",
-		smartcase = true,
-		smarttab = true,
-		softtabstop = 4,
-		splitbelow = true,
-		splitright = true,
-		startofline = false,
-		swapfile = false,
-		switchbuf = "usetab,uselast",
-		synmaxcol = 2500,
-		tabstop = 4,
-		termguicolors = true,
-		timeout = true,
-		timeoutlen = 300,
-		ttimeout = true,
-		ttimeoutlen = 0,
-		undodir = global.cache_dir .. "undo/",
+		shiftwidth = indent,             -- autoindent 时缩进的长度
+
+		encoding = "utf-8",              -- 编码格式
+
+		cursorline = true,               -- 高亮光标当前行
+
+		number = true,                   -- 左边栏显示行号
+		relativenumber = true,           -- 行号显示模式为 relative
+		signcolumn = "yes",              -- 行号左边留部分空间做标识用
+
+		mouse = "a",                     -- 终端模式下启用光标
+		clipboard = "unnamedplus",       -- 系统剪贴板里的内容可直接粘贴到 neovim 里
+
+		splitbelow = true,               -- 上下分割窗口时，新窗口放在下边
+		splitright = true,               -- 左右分割窗口时，新窗口放在右边
+
+		ignorecase = true,               -- 搜索时不用区分大小写
+		smartcase = true,                -- 搜索时输入大写字符，那么搜索包含大写字符的结果
+
+		termguicolors = true,            -- 终端模式下启用真彩色
+
+		backup = false,                  -- 关闭自动备份
+
+		foldenable = true,               -- 开启折叠代码功能
+		foldlevelstart = 99,             -- 能折叠代码的层级
+
 		undofile = true,
-		-- Please do NOT set `updatetime` to above 500, otherwise most plugins may not function correctly
-		updatetime = 200,
-		viewoptions = "folds,cursor,curdir,slash,unix",
-		virtualedit = "block",
-		visualbell = true,
-		whichwrap = "h,l,<,>,[,],~",
-		wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
-		wildignorecase = true,
-		winminwidth = 10,
-		winwidth = 30,
-		wrap = false,
-		wrapscan = true,
-		writebackup = false,
+		undodir = const.cache_dir .. "undo/",  --
 	}
-	local function isempty(s)
-		return s == nil or s == ""
-	end
 
-	-- custom python provider
-	local conda_prefix = os.getenv("CONDA_PREFIX")
-	if not isempty(conda_prefix) then
-		vim.g.python_host_prog = conda_prefix .. "/bin/python"
-		vim.g.python3_host_prog = conda_prefix .. "/bin/python"
-	elseif global.is_mac then
-		vim.g.python_host_prog = "/usr/bin/python"
-		vim.g.python3_host_prog = "/usr/local/bin/python3"
-	else
-		vim.g.python_host_prog = "/usr/bin/python"
-		vim.g.python3_host_prog = "/usr/bin/python3"
-	end
-
-	for name, value in pairs(global_local) do
+	-- Load options setting
+	for name, value in pairs(global_options) do
 		vim.o[name] = value
-	end
-
-	-- Fix sqlite3 missing-lib issue on Windows
-	if global.is_windows then
-		-- Download the DLLs form https://www.sqlite.org/download.html
-		vim.g.sqlite_clib_path = global.home .. "/Documents/sqlite-dll-win64-x64-3400100/sqlite3.dll"
 	end
 end
 

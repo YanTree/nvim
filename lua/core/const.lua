@@ -1,7 +1,7 @@
-local global = {}
+local const = {}
 local os_name = vim.loop.os_uname().sysname
 
-function global:load_variables()
+function const:load_variables()
 	self.is_mac = os_name == "Darwin"
 	self.is_linux = os_name == "Linux"
 	self.is_windows = os_name == "Windows_NT"
@@ -15,6 +15,6 @@ function global:load_variables()
 	self.data_dir = string.format("%s/site/", vim.fn.stdpath("data"))
 end
 
-global:load_variables()
+const:load_variables()
 
-return global
+return const

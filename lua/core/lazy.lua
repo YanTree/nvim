@@ -1,21 +1,11 @@
+local const = require("core.const")
+
 local fn, api = vim.fn, vim.api
-local global = require("core.global")
-local is_mac = global.is_mac
-local vim_path = global.vim_path
-local data_dir = global.data_dir
+local is_mac = const.is_mac
+local vim_path = const.vim_path
+local data_dir = const.data_dir
 local lazy_path = data_dir .. "lazy/lazy.nvim"
 local modules_dir = vim_path .. "/lua/modules"
-
-local settings = require("core.settings")
-local use_ssh = settings.use_ssh
-
-local icons = {
-	kind = require("modules.utils.icons").get("kind"),
-	documents = require("modules.utils.icons").get("documents"),
-	ui = require("modules.utils.icons").get("ui"),
-	ui_sep = require("modules.utils.icons").get("ui", true),
-	misc = require("modules.utils.icons").get("misc"),
-}
 
 local Lazy = {}
 
@@ -57,12 +47,12 @@ end
 
 function Lazy:load_lazy()
 	if not vim.loop.fs_stat(lazy_path) then
-		local lazy_repo = use_ssh and "git@github.com:folke/lazy.nvim.git " or "https://github.com/folke/lazy.nvim.git "
+		local lazy_repo = false and "git@github.com:folke/lazy.nvim.git " or "https://github.com/folke/lazy.nvim.git "
 		api.nvim_command("!git clone --filter=blob:none --branch=stable " .. lazy_repo .. lazy_path)
 	end
 	self:load_plugins()
 
-	local clone_prefix = use_ssh and "git@github.com:%s.git" or "https://github.com/%s.git"
+	local clone_prefix = false and "git@github.com:%s.git" or "https://github.com/%s.git"
 	local lazy_settings = {
 		root = data_dir .. "lazy", -- directory where plugins will be installed
 		git = {
@@ -81,27 +71,6 @@ function Lazy:load_lazy()
 			wrap = true, -- wrap the lines in the ui
 			-- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
 			border = "rounded",
-			icons = {
-				cmd = icons.misc.Code,
-				config = icons.ui.Gear,
-				event = icons.kind.Event,
-				ft = icons.documents.Files,
-				init = icons.misc.ManUp,
-				import = icons.documents.Import,
-				keys = icons.ui.Keyboard,
-				loaded = icons.ui.Check,
-				not_loaded = icons.misc.Ghost,
-				plugin = icons.ui.Package,
-				runtime = icons.misc.Vim,
-				source = icons.kind.StaticMethod,
-				start = icons.ui.Play,
-				list = {
-					icons.ui_sep.BigCircle,
-					icons.ui_sep.BigUnfilledCircle,
-					icons.ui_sep.Square,
-					icons.ui_sep.ChevronRight,
-				},
-			},
 		},
 		performance = {
 			cache = {

@@ -32,12 +32,12 @@ return function()
 		-- We defined mappings in `lua/keymap/init.lua` with description so disable them here.
 		mappings = {
 			-- Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
-			basic = false,
+			basic = true,
 			-- Extra mapping; `gco`, `gcO`, `gcA`
-			extra = false,
+			extra = true,
 		},
 		-- Function to call before (un)comment
-		pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+		pre_hook = nil,
 		-- Function to call after (un)comment
 		post_hook = nil,
 	})
