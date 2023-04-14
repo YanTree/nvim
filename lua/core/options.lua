@@ -1,48 +1,58 @@
 local const = require("core.const")
-local indent = 8
+local indent = 8                                        -- a tab equal eight space
 
+-- Type ':help options' look for nevim doc
 local function load_options()
-	local global_options = {
-                smartindent = true,              -- 自动缩进
-                expandtab = true,                -- 使用空格替换 tab
-                tabstop = indent,                -- 一个 tab 使用多少个空格
-                
+        local global_options = {
+                backup = false,                         -- disable to creates a backup file
+                writebackup = false,                    -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited 
 
-		shiftround = true,
-		shiftwidth = indent,             -- autoindent 时缩进的长度
+                undodir = const.cache_dir .. "undo/",   -- reset undo file directory
+                undofile = true,                        -- enable persistent undo
 
-		encoding = "utf-8",              -- 编码格式
+                fileencoding = "utf-8",                 -- the encoding written to a file
+                mouse = "a",                            -- mouse will alway available in neovim
+                clipboard = "unnamedplus",              -- neovim avabile access the system clipboard
+                signcolumn = "yes",                     -- always show the sign column, otherwise it would shift the text each time
+                showtabline = 0,                        -- never show tabline on top left corner (2: always, 1: leaset two tabs pages)
+                -- laststatus = 3,                         -- TODO:
+                conceallevel = 0,                       -- so that `` is visible in markdown files
+                swapfile = false,                       -- disable to creates a swapfile
+                showcmd = false,                        -- TODO:hide (partial) command in the last line of the screen (for performance)
+                wrap = false,                           -- display lines as one long line without wrap
 
-		cursorline = true,               -- 高亮光标当前行
+                scrolloff = 8,                          -- minimal number of screen lines to keep above and below the cursor
+                sidescrolloff = 12,                     -- minimal number of screen columns to keep to the left and right of the cursor if wrap is `false`
 
-		number = true,                   -- 左边栏显示行号
-		relativenumber = true,           -- 行号显示模式为 relative
-		signcolumn = "yes",              -- 行号左边留部分空间做标识用
+                timeout = true,                         -- enable timeout for a key pressed
+                timeoutlen = 300,                       -- time to wait for a mapped sequence to complete (in milliseconds)
 
-		mouse = "a",                     -- 终端模式下启用光标
-		clipboard = "unnamedplus",       -- 系统剪贴板里的内容可直接粘贴到 neovim 里
+                updatetime = 400,                       -- faster completion (4000ms default)
 
-		splitbelow = true,               -- 上下分割窗口时，新窗口放在下边
-		splitright = true,               -- 左右分割窗口时，新窗口放在右边
+                smartindent = true,                     -- make indenting smarter again
+                expandtab = true,                       -- convert tabs to spaces
+                tabstop = indent,                       -- insert 'indent' spaces for a tab
 
-		ignorecase = true,               -- 搜索时不用区分大小写
-		smartcase = true,                -- 搜索时输入大写字符，那么搜索包含大写字符的结果
+                shiftwidth = indent,                    -- the number of spaces inserted for each indentation
 
-		termguicolors = true,            -- 终端模式下启用真彩色
+                cursorline = true,                      -- hight the current line
 
-		backup = false,                  -- 关闭自动备份
+                number = true,                          -- show line of number at left
+                relativenumber = true,                  -- set line of number mode to relative
 
-		foldenable = true,               -- 开启折叠代码功能
-		foldlevelstart = 99,             -- 能折叠代码的层级
+                splitbelow = true,                      -- force all horizontal splits to go below current window
+                splitright = true,                      -- force all vertical splits to go to the right of current window
 
-		undofile = true,
-		undodir = const.cache_dir .. "undo/",  --
-	}
+                ignorecase = true,                      -- ignore case in search patterns
+                smartcase = true,                       -- smart case
 
-	-- Load options setting
-	for name, value in pairs(global_options) do
-		vim.o[name] = value
-	end
+                termguicolors = true,                   -- set term gui colors (most terminals support this)
+        }
+
+        -- Load options setting
+        for name, value in pairs(global_options) do
+                vim.o[name] = value
+        end
 end
 
 load_options()
