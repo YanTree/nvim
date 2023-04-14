@@ -14,12 +14,12 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 		end
 	end,
 	event = { "CursorHold", "CursorHoldI" },
-	config = require("editor.treesitter"),
+	-- config = require("editor.treesitter"),
 	dependencies = {
 		{ "nvim-treesitter/nvim-treesitter-textobjects" },
 		{
 			"NvChad/nvim-colorizer.lua",
-			config = require("editor.colorizer"),
+			-- config = require("editor.colorizer"),
 		},
 	}
 }
