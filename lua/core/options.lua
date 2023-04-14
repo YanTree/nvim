@@ -14,6 +14,7 @@ local function load_options()
                 mouse = "a",                            -- mouse will alway available in neovim
                 clipboard = "unnamedplus",              -- neovim avabile access the system clipboard
                 signcolumn = "yes",                     -- always show the sign column, otherwise it would shift the text each time
+                completeopt = { "menuone", "noselect" },-- mostly just for cmp
                 showtabline = 0,                        -- never show tabline on top left corner (2: always, 1: leaset two tabs pages)
                 -- laststatus = 3,                         -- TODO:
                 conceallevel = 0,                       -- so that `` is visible in markdown files
@@ -51,7 +52,7 @@ local function load_options()
 
         -- Load options setting
         for name, value in pairs(global_options) do
-                vim.o[name] = value
+                vim.opt[name] = value
         end
 end
 
