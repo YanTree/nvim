@@ -1,4 +1,4 @@
-local bindkey = require("core.cli.bindkey")
+local bindkey = require("core.lib.bindkey")
 local map_cr = bindkey.map_cr
 local map_cu = bindkey.map_cu
 local map_cmd = bindkey.map_cmd
