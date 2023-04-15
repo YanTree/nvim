@@ -10,6 +10,13 @@ settings["ssh_active"] = true
 ---@type string
 settings["colorscheme"] = "catppuccin-latte"
 
+-- Set pop window frame style
+-- Check below link search more style
+-- https://github.com/hrsh7th/nvim-cmp/pull/472 
+settings["borderchar"] = {
+        completion =  {'┌', '─', '┐', '│', '┘', '─', '└', '│'},
+}
+
 -- Set the telescope style
 --
 -- @type boolean

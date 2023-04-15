@@ -3,9 +3,14 @@ return function()
         -- local variables
         local luasnip = require("luasnip")
         local cmp = require("cmp")
+        local lspkind = require("lspkind")
+        local icons = require("core.lib.icons")
+        -- local borderchar = require("core.settings").borderchar
 
         local icons = {
-                kind = require("core.lib.icons").get("kind"),
+                kind = icons.get("kind"),
+                type = icons.get("type"),
+                cmp = icons.get("cmp"),
         }
 
         -- local function
@@ -18,7 +23,7 @@ return function()
         cmp.setup({
                 -- customize completion pop window style
                 window = {
-                        completion = cmp.config.window.bordered(),
+                        completion = cmp.config.window.bordered(), 
                         documentation = cmp.config.window.bordered(),
                 },
                 -- customize completion for snippets
@@ -78,14 +83,16 @@ return function()
                 formatting = {
                         fields = { "kind", "abbr", "menu" },
                         format = function(entry, vim_item)
-                                vim_item.kind = icons.kind[vim_item.kind]
-                                vim_item.menu = ({
-                                        nvim_lua = "[NEOVIM]",
-                                        luasnip = "[SNIP]",
-                                        buffer = "[BUF]",
-                                        path = "[PATH]",
-                                })[entry.source.name]
-                                return vim_item
+                                local kind = lspkind.cmp_format({
+                                        mode = "symbol_text",
+                                        maxwidth = 50,
+                                        symbol_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp),
+                                })(entry, vim_item)
+
+                                local strings = vim.split(kind.kind, "%s", { trimempty = true })
+                                kind.kind = "" .. strings[1] .. " "
+                                kind.menu = "    (" .. strings[2] .. ")"
+                                return kind
                         end,
                 },
                 sources = {
