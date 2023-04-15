@@ -11,7 +11,6 @@ return function()
                 ui = require("core.lib.icons").get("ui", true),
                 misc = require("core.lib.icons").get("misc", true),
         }
-        
         -- setup
         mason.setup({
                 ui = {
@@ -37,10 +36,10 @@ return function()
                 capabilities = capabilities,
         }
 
-        ---A handler to setup all servers defined under `completion/servers/*.lua`
+        ---A handler to setup all servers defined under `completion/lspservers/*.lua`
         ---@param lsp_name string
         local function mason_handler(lsp_name)
-                local ok, custom_handler = pcall(require, "completion.servers." .. lsp_name)
+                local ok, custom_handler = pcall(require, "completion.lspservers." .. lsp_name)
                 if not ok then
                         -- Default to use factory config for server(s) that doesn't include a spec
                         nvim_lsp[lsp_name].setup(opts)
