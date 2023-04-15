@@ -89,6 +89,8 @@ return function()
                         end,
                 },
                 sources = {
+                        -- completion LSP (cmp-nvim-lua plugin)
+                        { name = "nvim_lsp" },
                         -- completion neovim lua api(cmp-nvim-lua plugin)
                         { name = "nvim_lua"},
                         -- completion snippets(luasnip plugin)

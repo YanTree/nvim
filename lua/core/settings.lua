@@ -19,4 +19,14 @@ settings["telescope_title"] = {
         prompt = true,
 }
 
+-- Set the language servers that will be installed during bootstrap here
+-- check the below link for all the supported LSPs:
+-- https://github.com/neovim/nvim-lspconfig/tree/master/lua/lspconfig/server_configurations
+---@type string[]
+settings["lsp_deps"] = {
+        "bashls",
+        "powershell_es",
+        "lua_ls",
+}
+
 return settings
