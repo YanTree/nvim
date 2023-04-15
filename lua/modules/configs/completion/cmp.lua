@@ -4,6 +4,10 @@ return function()
         local luasnip = require("luasnip")
         local cmp = require("cmp")
 
+        local icons = {
+                kind = require("core.lib.icons").get("kind"),
+        }
+
         -- local function
         local check_backspace = function()
                 local col = vim.fn.col "." - 1
@@ -12,10 +16,12 @@ return function()
 
         -- fire up nvim-cmp plugin
         cmp.setup({
+                -- customize completion pop window style
                 window = {
                         completion = cmp.config.window.bordered(),
                         documentation = cmp.config.window.bordered(),
                 },
+                -- customize completion for snippets
                 snippet = {
                         -- REQUIRED - you must specify a snippet engine
                         expand = function(args)
@@ -23,6 +29,7 @@ return function()
                                 luasnip.lsp_expand(args.body)
                         end,
                 },
+                -- customize keymap on active pop window of completion
                 mapping = cmp.mapping.preset.insert({
                         -- "CTRL j/k" to select previous or next item
                         ["<C-j>"] = cmp.mapping.select_prev_item(),
@@ -67,9 +74,20 @@ return function()
                                 end
                         end, { "i", "s", }),
                 }),
-                -- TODO:format of completion list
-                -- formatting = {
-                -- },
+                -- customize format of completion list
+                formatting = {
+                        fields = { "kind", "abbr", "menu" },
+                        format = function(entry, vim_item)
+                                vim_item.kind = icons.kind[vim_item.kind]
+                                vim_item.menu = ({
+                                        nvim_lua = "[NEOVIM]",
+                                        luasnip = "[SNIP]",
+                                        buffer = "[BUF]",
+                                        path = "[PATH]",
+                                })[entry.source.name]
+                                return vim_item
+                        end,
+                },
                 sources = {
                         -- completion neovim lua api(cmp-nvim-lua plugin)
                         { name = "nvim_lua"},
