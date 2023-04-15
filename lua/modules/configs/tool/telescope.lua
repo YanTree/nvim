@@ -11,6 +11,8 @@ return function()
         -- setup
         telescope.setup({
                 defaults = {
+                        prompt_prefix = " " .. icons.ui.Telescope .. " ",
+                        selection_caret = icons.ui.ChevronRight,
                         layout_strategy = "center",
                         layout_config = {
                                 prompt_position = "bottom",
@@ -23,7 +25,7 @@ return function()
                         prompt_title = telescope_title.prompt,
 
                         path_display = { "absolute" },
-                        file_ignore_patterns = { ".git/" },
+                        file_ignore_patterns = { ".git/", ".cache", },
 
                         -- key binddings
                         mappings = {
@@ -41,7 +43,7 @@ return function()
                                 },
                         },
                 },
-		pickers = {
+                pickers = {
                         find_files = {
                                 previewer = false,
                         },
@@ -49,7 +51,7 @@ return function()
                         git_files = {
                                 previewer = false,
                         }
-		},
+                },
                 extensions = {
                         -- fuzzy match plugin
                         fzf = {
