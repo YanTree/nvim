@@ -14,7 +14,7 @@ local plug_map = {
                 :with_silent()
                 :with_noremap()
                 :with_expr()
-                :with_desc("Edit N: Toggle comment for line"),
+                :with_desc("Comment this line"),
         ["n|gbc"] = map_callback(function()
                         return vim.v.count == 0 and et("<Plug>(comment_toggle_blockwise_current)")
                                 or et("<Plug>(comment_toggle_blockwise_count)")
@@ -22,23 +22,23 @@ local plug_map = {
                 :with_silent()
                 :with_noremap()
                 :with_expr()
-                :with_desc("Edit N: Toggle comment for block"),
+                :with_desc("Comment visual block"),
         ["n|gc"] = map_cmd("<Plug>(comment_toggle_linewise)")
                 :with_silent()
                 :with_noremap()
-                :with_desc("Edit N: Toggle comment for line with operator"),
+                :with_desc("Comment line with operator"),
         ["n|gb"] = map_cmd("<Plug>(comment_toggle_blockwise)")
                 :with_silent()
                 :with_noremap()
-                :with_desc("Edit N: Toggle comment for block with operator"),
+                :with_desc("Comment block with operator"),
         ["x|gc"] = map_cmd("<Plug>(comment_toggle_linewise_visual)")
                 :with_silent()
                 :with_noremap()
-                :with_desc("Edit X: Toggle comment for line with selection"),
+                :with_desc("Comment line with selection"),
         ["x|gb"] = map_cmd("<Plug>(comment_toggle_blockwise_visual)")
                 :with_silent()
                 :with_noremap()
-                :with_desc("Edit X: Toggle comment for block with selection"),
+                :with_desc("Comment block with selection"),
 }
 
 bindkey.nvim_load_mapping(plug_map)

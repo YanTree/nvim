@@ -11,16 +11,16 @@ local plug_map = {
 		end)
 		:with_noremap()
 		:with_silent()
-		:with_desc("File: Recently files"),
-        ["n|<leader>ff"] = map_cu("Telescope find_files"):with_noremap():with_silent():with_desc("File: File in project"),
-        ["n|<leader>fg"] = map_cu("Telescope git_files"):with_noremap():with_silent():with_desc("File: File in git"),
+		:with_desc("Recent files"),
+        ["n|<leader>ff"] = map_cu("Telescope find_files"):with_noremap():with_silent():with_desc("Find file in project"),
+        ["n|<leader>fg"] = map_cu("Telescope git_files"):with_noremap():with_silent():with_desc("Find file in git"),
 
-        ["n|<leader>bb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("Buffer: Switch buffer"),
+        ["n|<leader>bb"] = map_cu("Telescope buffers"):with_noremap():with_silent():with_desc("Switch buffer"),
 
-        ["n|<leader>sd"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("Search: Search string current Directory"),
+        ["n|<leader>sd"] = map_cu("Telescope grep_string"):with_noremap():with_silent():with_desc("Search current Directory"),
 
         -- Plugin: nvim-tree
-        ["n|tt"] = map_cr("NvimTreeToggle"):with_noremap():with_silent():with_desc("FileTree: Toggle"),
+        ["n|tt"] = map_cr("NvimTreeToggle"):with_noremap():with_silent():with_desc("Toggle nvim-tree"),
 }
 
 bindkey.nvim_load_mapping(plug_map)
