@@ -7,8 +7,9 @@ completion["hrsh7th/nvim-cmp"] = {
         config = require("completion.cmp"),
         dependencies = {
                 -- Plugins for nvim-cmp
-                { "hrsh7th/cmp-buffer" },       -- buffer completions
-                { "hrsh7th/cmp-path" },         -- file path completions
+                { "hrsh7th/cmp-buffer" },       -- completion all buffer string
+                { "hrsh7th/cmp-path" },         -- completion file directory
+                { "hrsh7th/cmp-nvim-lua" },     -- completion neovim lua api
                 { "saadparwaiz1/cmp_luasnip" }, -- luasnip plugin for nvim-cmp
 
                 -- Snippets for snippet

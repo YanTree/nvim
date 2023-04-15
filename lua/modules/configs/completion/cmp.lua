@@ -71,8 +71,13 @@ return function()
                 -- formatting = {
                 -- },
                 sources = {
+                        -- completion neovim lua api(cmp-nvim-lua plugin)
+                        { name = "nvim_lua"},
+                        -- completion snippets(luasnip plugin)
                         { name = "luasnip"},
+                        -- completion all buffer string(cmp-buffer plugin)
                         { name = "buffer"},
+                        -- completion file directory(cmp-path plugin)
                         { name = "path"},
                 },
                 confirm_opts = {
