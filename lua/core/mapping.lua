@@ -26,6 +26,8 @@ local core_map = {
         ["n|<leader>wh"] = map_cmd("<C-w>s"):with_desc("Split window horizontal"),
 
         -- Visual mode
+        ["v|p"] = map_cmd('"_dP'):with_desc("Paste const context"),
+
         ["v|J"] = map_cmd(":m '>+1<CR>gv=gv"):with_desc("Move this line down"),
         ["v|K"] = map_cmd(":m '<-2<CR>gv=gv"):with_desc("Move this line up"),
 
