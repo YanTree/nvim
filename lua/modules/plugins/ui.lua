@@ -1,9 +1,10 @@
 local ui = {}
 
-ui["folke/tokyonight.nvim"] = {
-	lazy = false,
-	priority = 1000,
-	config = require("ui.tokyonight")
+-- Theme
+ui["catppuccin/nvim"] = {
+        lazy = false,
+        name = "catppuccin",
+        config = require("ui.catppuccin")
 }
 
 return ui
