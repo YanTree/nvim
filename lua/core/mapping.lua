@@ -4,6 +4,13 @@ local map_cu = bindkey.map_cu
 local map_cmd = bindkey.map_cmd
 
 local core_map = {
+
+        -- resize window
+        ["n|<C-UP>"] = map_cr("resize -2"):with_noremap():with_desc("window: Resize -2 horizontally"),
+        ["n|<C-Down>"] = map_cr("resize +2"):with_noremap():with_desc("window: Resize +2 horizontally"),
+        ["n|<C-Left>"] = map_cr("vertical resize -2"):with_noremap():with_desc("window: Resize +2 vertically"),
+        ["n|<C-Right>"] = map_cr("vertical resize +2"):with_noremap():with_desc("window: Resize +2 vertically"),
+
         ["n|<esc>"] = map_cmd(":nohl<CR>"):with_desc("Edit N: Quit highlight state"),
         ["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap():with_desc("window: Focus left"),
         ["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap():with_desc("window: Focus right"),
