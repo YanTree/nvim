@@ -5,6 +5,9 @@ local map_cmd = bindkey.map_cmd
 
 local core_map = {
 
+        -- buffer
+        ["n|<leader>bN"] = map_cu(":enew"):with_noremap():with_silent():with_desc("New empty buffer"),
+
         -- resize window
         ["n|<C-UP>"] = map_cr("resize -2"):with_noremap():with_desc("window: Resize -2 horizontally"),
         ["n|<C-Down>"] = map_cr("resize +2"):with_noremap():with_desc("window: Resize +2 horizontally"),
@@ -12,6 +15,8 @@ local core_map = {
         ["n|<C-Right>"] = map_cr("vertical resize +2"):with_noremap():with_desc("window: Resize +2 vertically"),
 
         ["n|<esc>"] = map_cmd(":nohl<CR>"):with_desc("Edit N: Quit highlight state"),
+
+        -- navigate window
         ["n|<C-h>"] = map_cmd("<C-w>h"):with_noremap():with_desc("window: Focus left"),
         ["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap():with_desc("window: Focus right"),
         ["n|<C-j>"] = map_cmd("<C-w>j"):with_noremap():with_desc("window: Focus down"),
