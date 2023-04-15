@@ -10,4 +10,13 @@ settings["ssh_active"] = true
 ---@type string
 settings["colorscheme"] = "catppuccin-latte"
 
+-- Set the telescope style
+--
+-- @type boolean
+settings["telescope_title"] = {
+        preview = false,
+        results = false,
+        prompt = true,
+}
+
 return settings

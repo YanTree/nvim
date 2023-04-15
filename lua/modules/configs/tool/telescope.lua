@@ -1,21 +1,45 @@
 return function()
-
         -- local variable
+        local telescope_title = require("core.settings").telescope_title
+
         local icons = {
                 ui = require("core.lib.icons").get("ui", true)
         }
         local telescope = require("telescope")
+        local actions = require("telescope.actions")
 
         -- setup
         telescope.setup({
                 defaults = {
-                        layout_strategy = "bottom_pane",
+                        layout_strategy = "center",
                         layout_config = {
                                 prompt_position = "bottom",
-                                height = 0.36,
+                                height = 0.4,
                         },
+
+                        -- show title?
+                        dynamic_preview_title = telescope_title.preview,
+                        results_title = telescope_title.results,
+                        prompt_title = telescope_title.prompt,
+
                         path_display = { "absolute" },
                         file_ignore_patterns = { ".git/" },
+
+                        -- key binddings
+                        mappings = {
+                                i = {
+                                        ["<C-n>"] = actions.cycle_history_next,
+                                        ["<C-p>"] = actions.cycle_history_prev,
+
+                                        ["<C-j>"] = actions.move_selection_next,
+                                        ["<C-k>"] = actions.move_selection_previous,
+
+                                        ["<C-e>"] = actions.close,
+
+                                        ["<Down>"] = actions.move_selection_next,
+                                        ["<Up>"] = actions.move_selection_previous,
+                                },
+                        },
                 },
 		pickers = {
                         find_files = {
