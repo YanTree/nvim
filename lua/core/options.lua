@@ -48,6 +48,9 @@ local function load_options()
                 smartcase = true,                       -- smart case
 
                 termguicolors = true,                   -- set term gui colors (most terminals support this)
+
+                foldenable = true,                      -- default not fold code 
+                foldlevelstart = 99,                    -- 
         }
 
         -- Load options setting
