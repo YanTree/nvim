@@ -30,7 +30,7 @@ local plug_map = {
                         :with_desc("Swith project"),
 
         -- Plugin: nvim-tree
-        ["n|tt"] = map_cr("NvimTreeToggle"):with_noremap():with_silent():with_desc("Toggle nvim-tree"),
+        ["n|<leader>op"] = map_cr("NvimTreeToggle"):with_noremap():with_silent():with_desc("Toggle nvim-tree"),
 }
 
 bindkey.nvim_load_mapping(plug_map)
