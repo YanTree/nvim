@@ -6,9 +6,9 @@ local home = require("core.const").home
 settings["ssh_active"] = true
 
 -- Set the colorscheme to use here.
--- Available values are: `tokyonight`, `tokyonight-night`, `tokyonight-storm`, `tokyonight-day`, `tokyonight-moon`.
+-- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`
 ---@type string
-settings["colorscheme"] = "catppuccin-latte"
+settings["colorscheme"] = "catppuccin-frappe"
 
 -- Set pop window frame style
 -- Check below link search more style
