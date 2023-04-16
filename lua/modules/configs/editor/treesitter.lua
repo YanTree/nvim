@@ -41,6 +41,10 @@ return vim.schedule_wrap(function()
                 -- colors = {}, -- table of hex strings
                 -- termcolors = {} -- table of colour name strings
           },
+          -- autopairs plugin integration
+          autopairs = { 
+                enable = true,
+          },
         })
 
         require("nvim-treesitter.install").prefer_git = true

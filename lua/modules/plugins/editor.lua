@@ -27,4 +27,13 @@ editor["nvim-treesitter/nvim-treesitter"] = {
                 },
         }
 }
+
+-- automatic close pair(eg: ()[]{})
+-- extra: config for cmp and treesitter
+editor["windwp/nvim-autopairs"] = {
+        lazy = true,
+        event = { "CursorHold", "CursorHoldI" },
+        config = require("editor.autopairs"),
+}
+
 return editor
