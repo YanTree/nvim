@@ -6,6 +6,7 @@ editor["numToStr/Comment.nvim"] = {
         config = require("editor.comment"),
 }
 
+-- syntax highlight(maybe) plugin
 editor["nvim-treesitter/nvim-treesitter"] = {
         lazy = true,
         build = function()
@@ -14,12 +15,15 @@ editor["nvim-treesitter/nvim-treesitter"] = {
                 end
         end,
         event = { "CursorHold", "CursorHoldI" },
-        -- config = require("editor.treesitter"),
+        config = require("editor.treesitter"),
         dependencies = {
-                { "nvim-treesitter/nvim-treesitter-textobjects" },
+
+                -- rainbow pair(eg: {} [] ())
+                { "mrjones2014/nvim-ts-rainbow" },
                 {
+                        -- hex color value(eg: #fff372) paint with real color
                         "NvChad/nvim-colorizer.lua",
-                        -- config = require("editor.colorizer"),
+                        config = require("editor.colorizer"),
                 },
         }
 }
