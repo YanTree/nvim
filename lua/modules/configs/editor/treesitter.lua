@@ -42,8 +42,13 @@ return vim.schedule_wrap(function()
                 -- termcolors = {} -- table of colour name strings
           },
           -- autopairs plugin integration
-          autopairs = { 
+          autopairs = {
                 enable = true,
+          },
+          -- setting for integration with Comment.nvim plugin
+          context_commentstring = {
+                  enable = true,
+                  enable_autocmd = false,
           },
         })
 

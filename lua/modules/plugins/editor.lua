@@ -1,11 +1,5 @@
 local editor = {}
 
-editor["numToStr/Comment.nvim"] = {
-        lazy = true,
-        event = { "CursorHold", "CursorHoldI" },
-        config = require("editor.comment"),
-}
-
 -- syntax highlight(maybe) plugin
 editor["nvim-treesitter/nvim-treesitter"] = {
         lazy = true,
@@ -17,7 +11,8 @@ editor["nvim-treesitter/nvim-treesitter"] = {
         event = { "CursorHold", "CursorHoldI" },
         config = require("editor.treesitter"),
         dependencies = {
-
+                -- comment string based on the cursor location in the file
+                { "JoosepAlviste/nvim-ts-context-commentstring" },
                 -- rainbow pair(eg: {} [] ())
                 { "mrjones2014/nvim-ts-rainbow" },
                 {
@@ -29,11 +24,18 @@ editor["nvim-treesitter/nvim-treesitter"] = {
 }
 
 -- automatic close pair(eg: ()[]{})
--- extra: config for cmp and treesitter
+-- extra: need integration with cmp and treesitter
 editor["windwp/nvim-autopairs"] = {
         lazy = true,
         event = { "CursorHold", "CursorHoldI" },
         config = require("editor.autopairs"),
 }
 
+-- comment code plugin
+-- extra: need integration with treesitter
+editor["numToStr/Comment.nvim"] = {
+        lazy = true,
+        event = { "CursorHold", "CursorHoldI" },
+        config = require("editor.comment"),
+}
 return editor
