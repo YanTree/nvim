@@ -60,8 +60,8 @@ return function()
                 },
                 -- 
                 update_focused_file = {
-                        enable = true,
-                        update_root = true,
+                        enable = false,
+                        update_root = false,
                         ignore_list = {},
                 },
                 -- show lsp and coc diagnostics in the signcolum
