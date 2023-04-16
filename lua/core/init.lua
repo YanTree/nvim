@@ -26,6 +26,11 @@ local leader_map = function()
         vim.g.mapleader = " "
 end
 
+local disable_distribution_plugins = function()
+        -- disable netrw at the very start, use nvim-tree instead 
+        vim.g.loaded_netrw = 1
+        vim.g.loaded_netrwPlugin = 1
+end
 
 local load_core = function()
         -- font setting for GUI version
@@ -33,6 +38,8 @@ local load_core = function()
 
         -- create dir to put nvim data file
         createdir()
+        -- disable few setting on init
+        disable_distribution_plugins()
         -- setting about leader map
         leader_map()
 
