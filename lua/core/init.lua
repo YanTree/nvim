@@ -21,40 +21,35 @@ local createdir = function()
         end
 end
 
-local disable_distribution_plugins = function()
-        -- Whether to load netrw by default
-        vim.g.loaded_netrw = 1
-        -- vim.g.loaded_netrwFileHandlers = 1
-        vim.g.loaded_netrwPlugin = 1
-        -- vim.g.loaded_netrwSettings = 1
-        -- newtrw liststyle: https://medium.com/usevim/the-netrw-style-options-3ebe91d42456
-        -- vim.g.netrw_liststyle = 3
-end
-
 local leader_map = function()
-        vim.g.mapleader = " "                                       -- Leader key 设置为空格键
-        vim.api.nvim_set_keymap("n", " ","", {noremap = true})      -- NORMAL MODE 下的空格键置空
-        vim.api.nvim_set_keymap("x", " ","", {noremap = true})      -- X MODE 下的空格键置空
-
+        -- setting 'space' key as Leader key
+        vim.g.mapleader = " "
 end
 
 
 local load_core = function()
-        -- Font setting for GUI version
+        -- font setting for GUI version
         vim.api.nvim_set_option_value("guifont", "Hack NFM:h10", {})
 
+        -- create dir to put nvim data file
         createdir()
-        -- disable_distribution_plugins()
+        -- setting about leader map
         leader_map()
 
+        -- import nvim options(eg: cursorline = true) setting
         require("core.options")
+        -- import nvim key bindding(eg: resize window) setting without third plugin
         require("core.mapping")
+        -- import folder of keymap, put all third plugin(eg: telescope) key bindding setting
         require("keymap")
+        -- heart of config, third plugin 'lazy.nvim'. one manager to handle all third plugins
         require("core.lazy")
 
-        -- Load theme setting
+        -- get colorscheme from settings file
         local colorscheme = require("core.settings").colorscheme
+        -- apply colorscheme from settings file
         vim.api.nvim_command("colorscheme " .. colorscheme)
 end
 
+-- fire core setting
 load_core()

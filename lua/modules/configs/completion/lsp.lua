@@ -3,13 +3,14 @@ return function()
         local nvim_lsp = require("lspconfig")
         local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
+        local icon = require("core.lib.icons")
 
         -- pop window style
-        require("lspconfig.ui.windows").default_options.border = "single"
+        -- require("lspconfig.ui.windows").default_options.border = "single"
 
         local icons = {
-                ui = require("core.lib.icons").get("ui", true),
-                misc = require("core.lib.icons").get("misc", true),
+                ui = icon.get("ui", true),
+                misc = icon.get("misc", true),
         }
         -- setup
         mason.setup({
@@ -65,5 +66,7 @@ return function()
         end
 
         mason_lspconfig.setup_handlers({ mason_handler })
+
+        -- TODO: lsp diagnosticsin setting (error, warn, hint, info)
 
 end

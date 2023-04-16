@@ -4,13 +4,12 @@ return function()
         local luasnip = require("luasnip")
         local cmp = require("cmp")
         local lspkind = require("lspkind")
-        local icons = require("core.lib.icons")
-        -- local borderchar = require("core.settings").borderchar
+        local icon = require("core.lib.icons")
 
         local icons = {
-                kind = icons.get("kind"),
-                type = icons.get("type"),
-                cmp = icons.get("cmp"),
+                kind = icon.get("kind"),
+                type = icon.get("type"),
+                cmp = icon.get("cmp"),
         }
 
         -- local function
@@ -23,7 +22,7 @@ return function()
         cmp.setup({
                 -- customize completion pop window style
                 window = {
-                        completion = cmp.config.window.bordered(), 
+                        completion = cmp.config.window.bordered(),
                         documentation = cmp.config.window.bordered(),
                 },
                 -- customize completion for snippets

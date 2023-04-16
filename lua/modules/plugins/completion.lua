@@ -15,14 +15,16 @@ completion["hrsh7th/nvim-cmp"] = {
                 { "onsails/lspkind.nvim" },     -- vscode-like pictograms for neovim lsp completion items
                 -- Snippets for snippet
                 {
-                        "L3MON4D3/LuaSnip",     -- snippet engine
+                        -- snippet engine
+                        "L3MON4D3/LuaSnip",
+                        -- some useful snippets
                         dependencies = { "rafamadriz/friendly-snippets" },
                         config = require("completion.luasnip"),
                 },
         },
 }
 
--- LSP
+-- LSP plugin
 completion["neovim/nvim-lspconfig"] = {
         lazy = true,
         event = { "BufReadPost", "BufAdd", "BufNewFile" },
