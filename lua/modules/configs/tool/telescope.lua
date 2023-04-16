@@ -13,7 +13,7 @@ return function()
                 defaults = {
                         prompt_prefix = " " .. icons.ui.Telescope .. " ",
                         selection_caret = icons.ui.ChevronRight,
-                        layout_strategy = "center",
+                        layout_strategy = "horizontal",
                         layout_config = {
                                 prompt_position = "bottom",
                                 height = 0.4,
@@ -48,9 +48,9 @@ return function()
                                 previewer = false,
                         },
 
-                        git_files = {
-                                previewer = false,
-                        }
+                        -- git_files = {
+                        --         previewer = false,
+                        -- }
                 },
                 extensions = {
                         -- fuzzy match plugin
