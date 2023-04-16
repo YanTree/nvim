@@ -1,4 +1,9 @@
 return function()
+        local icon = require("core.lib.icons")
+        local icons = {
+                ui = icon.get("ui"),
+                misc = icon.get("misc"),
+        }
         require("which-key").setup({
                 plugins = {
                         presets = {
@@ -11,7 +16,11 @@ return function()
                                 g = true,
                         },
                 },
-
+                icons = {
+                        breadcrumb = icons.ui.Separator,
+                        separator = " ",
+                        group = icons.misc.Add,
+                },
                 window = {
                         border = "none",
                         position = "bottom",
