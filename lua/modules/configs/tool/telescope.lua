@@ -1,6 +1,6 @@
 return function()
         -- local variable
-        local telescope_title = require("core.settings").telescope_title
+        local title_active = require("core.settings").telescope_title
 
         local icons = {
                 ui = require("core.lib.icons").get("ui", true)
@@ -13,16 +13,33 @@ return function()
                 defaults = {
                         prompt_prefix = " " .. icons.ui.Telescope .. " ",
                         selection_caret = icons.ui.ChevronRight,
+
+                        sorting_strategy = "ascending",
                         layout_strategy = "horizontal",
+                        -- layout_strategy = {
+                        --         height = 0.9,
+                        --         preview_cutoff = 120,
+                        --         prompt_position = "top",
+                        --         with = 0.8,
+                        -- },
                         layout_config = {
-                                prompt_position = "bottom",
+                                prompt_position = "top",
                                 height = 0.4,
+                                -- preview_cutoff = 1,
+                                --
+                                -- width = function (_, max_columns, _)
+                                --         return math.min(max_columns, 80)
+                                -- end,
+                                --
+                                -- height = function (_, _, max_lines)
+                                --         return math.min(max_lines, 15)
+                                -- end,
                         },
 
                         -- show title?
-                        dynamic_preview_title = telescope_title.preview,
-                        results_title = telescope_title.results,
-                        prompt_title = telescope_title.prompt,
+                        dynamic_preview_title = title_active.preview,
+                        results_title = title_active.results,
+                        prompt_title = title_active.prompt,
 
                         path_display = { "absolute" },
                         file_ignore_patterns = { ".git/", ".cache", },
