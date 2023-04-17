@@ -15,8 +15,8 @@ local function load_options()
                 clipboard = "unnamedplus",              -- neovim avabile access the system clipboard
                 signcolumn = "yes",                     -- always show the sign column, otherwise it would shift the text each time
                 completeopt = { "menuone", "noselect" },-- mostly just for cmp
-                showtabline = 0,                        -- never show tabline on top left corner (2: always, 1: leaset two tabs pages)
-                -- laststatus = 3,                         -- TODO:
+                showtabline = 2,                        -- never show tabline on top left corner (2: always, 1: leaset two tabs pages, 0: never)
+                -- laststatus = 1,                         -- TODO:
                 conceallevel = 0,                       -- so that `` is visible in markdown files
                 swapfile = false,                       -- disable to creates a swapfile
                 showcmd = false,                        -- TODO:hide (partial) command in the last line of the screen (for performance)
