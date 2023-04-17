@@ -1,5 +1,6 @@
 return function()
         -- local variable
+        local const = require("core.const")
         local title_active = require("core.settings").telescope_title
 
         local icons = {
@@ -86,6 +87,7 @@ return function()
                 }
         })
 
+        -- config for project, telescope swith projects
         require("project_nvim").setup({
                 manual_mode = false,
                 detection_methods = { "lsp", "pattern" },
@@ -97,6 +99,12 @@ return function()
                 scope_chdir = "global",
                 datapath = vim.fn.stdpath("data"),
         })
+
+        -- fix: sqlite.lua look for sqlite3.dll on windows correctly
+        if const.is_windows then
+                -- sqlite3 config for 
+                vim.g.sqlite_clib_path = const.sqlite3
+        end
 
         -- load extension fzf
         telescope.load_extension("fzf")

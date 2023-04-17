@@ -36,6 +36,9 @@ function const:load_variables()
         self.home = home
         -- set data dir on neovim "data" path
         self.data_dir = string.format("%s/site/", vim.fn.stdpath("data"))
+        -- windows sqlite3.dll path, i use scoop to manager software,
+        -- so, put it to sqlite install path
+        self.sqlite3 = home .. path_sep .. "scoop" .. path_sep .. "apps" .. path_sep .. "sqlite" .. path_sep .. "current" .. path_sep .. "sqlite3.dll"
 end
 
 const:load_variables()
