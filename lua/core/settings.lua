@@ -5,6 +5,10 @@ local home = require("core.const").home
 ---@type boolean
 settings["ssh_active"] = true
 
+-- Font with size for neovim gui app
+---@type string
+settings["font"] = "MesloLGMDZ NFM:h10"
+
 -- Set the colorscheme to use here.
 -- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`
 ---@type string

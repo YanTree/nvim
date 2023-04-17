@@ -1,4 +1,6 @@
+-- local variable
 local const = require("core.const")
+local settings = require("core.settings")
 
 -- Create cache dir and data dirs
 local createdir = function()
@@ -34,7 +36,7 @@ end
 
 local load_core = function()
         -- font setting for GUI version
-        vim.api.nvim_set_option_value("guifont", "Hack NFM:h10", {})
+        vim.api.nvim_set_option_value("guifont", settings.font, {})
 
         -- create dir to put nvim data file
         createdir()
@@ -53,8 +55,9 @@ local load_core = function()
         require("core.lazy")
 
         -- get colorscheme from settings file
-        local colorscheme = require("core.settings").colorscheme
+        local colorscheme = settings.colorscheme
         -- apply colorscheme from settings file
+        -- vim.startswith("colorscheme ", colorscheme)
         vim.api.nvim_command("colorscheme " .. colorscheme)
 end
 
