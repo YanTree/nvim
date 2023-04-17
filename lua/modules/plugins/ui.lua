@@ -14,4 +14,12 @@ ui["goolord/alpha-nvim"] = {
 	config = require("ui.alpha"),
 }
 
+-- show buffer state(add, delete, modify) at signcolumn
+-- navigation/stage/preview hunks, blame line, and so
+ui["lewis6991/gitsigns.nvim"] = {
+	lazy = true,
+	event = { "CursorHold", "CursorHoldI" },
+	config = require("ui.gitsigns"),
+}
+
 return ui
