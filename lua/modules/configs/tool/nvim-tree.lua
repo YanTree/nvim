@@ -24,7 +24,7 @@ return function()
                         special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
                         -- show indent mark on explore
                         indent_markers = {
-                                enable = true,
+                                enable = false,
                         },
                         -- icon setup
                         icons = {
