@@ -12,6 +12,7 @@ local Lazy = {}
 function Lazy:load_plugins()
         self.modules = {}
 
+        -- :h package.path. The path used by require to search for a lua loader
         local append_nativertp = function()
                 package.path = package.path
                         .. string.format(";%s;%s", modules_dir .. "/configs/?.lua", modules_dir .. "/configs/?/init.lua")
@@ -30,6 +31,7 @@ function Lazy:load_plugins()
                 return list
         end
 
+        -- rest package.path
         append_nativertp()
 
         local plugins_file = get_plugins_list()
@@ -93,6 +95,7 @@ function Lazy:load_lazy()
                 lazy_settings.concurrency = 20
         end
 
+        -- fire lazy_path first of runtime path
         vim.opt.rtp:prepend(lazy_path)
         require("lazy").setup(self.modules, lazy_settings)
 end
