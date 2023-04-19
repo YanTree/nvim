@@ -18,6 +18,7 @@ ui["goolord/alpha-nvim"] = {
 -- navigation/stage/preview hunks, blame line, and so
 ui["lewis6991/gitsigns.nvim"] = {
 	lazy = true,
+        cmd = {"Gitsigns"},
 	event = { "CursorHold", "CursorHoldI" },
 	config = require("ui.gitsigns"),
 }
