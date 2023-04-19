@@ -10,9 +10,9 @@ settings["ssh_active"] = true
 settings["font"] = "MesloLGMDZ NFM:h10"
 
 -- Set the colorscheme to use here.
--- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`
+-- Available values are: `catppuccin`, `catppuccin-latte`, `catppucin-mocha`, `catppuccin-frappe`, `catppuccin-macchiato`, `monokai-pro`
 ---@type string
-settings["colorscheme"] = "catppuccin-frappe"
+settings["colorscheme"] = "monokai-pro"
 
 -- Set pop window frame style
 -- Check below link search more style

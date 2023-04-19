@@ -2,9 +2,16 @@ local ui = {}
 
 -- one customize theme
 ui["catppuccin/nvim"] = {
-        lazy = false,
+        lazy = true,
         name = "catppuccin",
         config = require("ui.catppuccin")
+}
+
+-- one monokai-pro customize theme
+ui["loctvl842/monokai-pro.nvim"] = {
+        lazy = true,
+        cmd = {"Monokai"},
+        config = require("ui.monokai-pro")
 }
 
 -- one customize dashboard

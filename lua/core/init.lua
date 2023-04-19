@@ -57,7 +57,6 @@ local load_core = function()
         -- get colorscheme from settings file
         local colorscheme = settings.colorscheme
         -- apply colorscheme from settings file
-        -- vim.startswith("colorscheme ", colorscheme)
         vim.api.nvim_command("colorscheme " .. colorscheme)
 end
 
