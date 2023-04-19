@@ -6,13 +6,13 @@ require("monokai-pro").setup({
 
   styles = {
     comment = { italic = true },
-    keyword = { italic = true }, -- any other keyword
+    keyword = { italic = false}, -- any other keyword
     type = { italic = true }, -- (preferred) int, long, char, etc
-    storageclass = { italic = true }, -- static, register, volatile, etc
-    structure = { italic = true }, -- struct, union, enum, etc
-    parameter = { italic = true }, -- parameter pass in function
-    annotation = { italic = true },
-    tag_attribute = { italic = true }, -- attribute of tag in reactjs
+    storageclass = { italic = false }, -- static, register, volatile, etc
+    structure = { italic = false }, -- struct, union, enum, etc
+    parameter = { italic = false }, -- parameter pass in function
+    annotation = { italic = false },
+    tag_attribute = { italic = false }, -- attribute of tag in reactjs
   },
 
   inc_search = "background", -- underline | background
@@ -28,9 +28,9 @@ require("monokai-pro").setup({
   background_clear = {
     -- "float_win",
     "toggleterm",
-    "telescope",
-    "which-key",
-    "renamer"
+    -- "telescope",
+    -- "which-key",
+    -- "renamer"
   },-- "float_win", "toggleterm", "telescope", "which-key", "renamer", "neo-tree"
   -- plugins = {
   --   bufferline = {

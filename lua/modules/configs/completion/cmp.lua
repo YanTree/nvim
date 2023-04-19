@@ -18,13 +18,19 @@ return function()
                 return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
         end
 
+        -- single hard corner outline border
+        local border_opts = {
+                border = "single",
+                winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+        }
+
         -- fire up nvim-cmp plugin
         cmp.setup({
                 -- customize completion pop window style
-                window = {
-                        completion = cmp.config.window.bordered(),
-                        documentation = cmp.config.window.bordered(),
-                },
+                -- window = {
+                --         completion = cmp.config.window.bordered(border_opts),
+                --         documentation = cmp.config.window.bordered(border_opts),
+                -- },
                 -- customize completion for snippets
                 snippet = {
                         -- REQUIRED - you must specify a snippet engine
@@ -36,8 +42,8 @@ return function()
                 -- customize keymap on active pop window of completion
                 mapping = cmp.mapping.preset.insert({
                         -- "CTRL j/k" to select previous or next item
-                        ["<C-j>"] = cmp.mapping.select_prev_item(),
-                        ["<C-k>"] = cmp.mapping.select_next_item(),
+                        ["<C-k>"] = cmp.mapping.select_prev_item(),
+                        ["<C-j>"] = cmp.mapping.select_next_item(),
 
                         -- "CTRL b/f" to move prview window
                         ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
