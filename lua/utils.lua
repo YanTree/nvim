@@ -20,18 +20,7 @@ end
 M.dofile_modules_config = function()
         -- return a list with all config.lua files under 'modules_path' directory
         local config_list = vim.split(vim.fn.glob(modules_path .. "/*/*/config.lua"), "\n")
-
-        if type(config_list) == "table" then
-                for _, file in ipairs(config_list) do
-                        -- readfile(file)
-                        -- loadfile(file)
-                        dofile(file)
-                end
-        end
-        -- M.modules_dofile(config_list)
-end
-
-M.make_packages_tbl = function (str)
+        M.modules_dofile(config_list)
 end
 
 return M
