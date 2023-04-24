@@ -1,12 +1,10 @@
-require("cat")
-
+local utils = require("utils")
 local indent = require("config").ui.indent
 local opt = vim.opt
-local util = require("utils")
 
-util.create_cache_folder()
-util.dofile_modules_packages()
-util.dofile_modules_config()
+utils.create_cache_folder()
+utils.dofile_modules_packages()
+utils.dofile_modules_config()
 
 ----------- options -------------------------
 opt.backup = false                         -- disable to creates a backup file
@@ -57,13 +55,10 @@ opt.termguicolors = true                   -- set term gui colors (most terminal
 opt.foldenable = true                      -- default not fold code 
 opt.foldlevelstart = 99                    -- 
 
-print(print(vim.inspect(cat.packages)))
-print(print(vim.inspect(cat.config)))
+-- print(print(vim.inspect(cat.packages)))
+-- print(print(vim.inspect(cat.config)))
 
 -- for name, config in pairs(cat.packages) do
 --         print(vim.inspect(name))
 --         print(vim.inspect(config))
 -- end
-
-print(print(vim.inspect(cat.modules)))
-

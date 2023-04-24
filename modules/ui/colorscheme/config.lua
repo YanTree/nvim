@@ -1,7 +1,7 @@
 -- ui/colorscheme/config.lua
 
 local config = {
-        lazy = true,
+        lazy = false,
 
 
         opts = {

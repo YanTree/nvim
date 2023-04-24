@@ -21,11 +21,12 @@ end
 
 
 ----------- setting path ------------------
+local home = os.getenv("HOME")
 cat.path = {
-        home = os.getenv("HOME"),
+        home = home,
         config = vim.fn.stdpath("config"),
         modules = vim.fn.stdpath("config") .. "/modules",
         data = string.format("%s/catsite/", vim.fn.stdpath("data")),
-        cache = cat.path.home .. "/.cache/nvim",
-        sqlite3 = cat.path.home .. "/scoop/apps/sqlite/current/sqlite3.dll",
+        cache = home .. "/.cache/nvim",
+        sqlite3 = home .. "/scoop/apps/sqlite/current/sqlite3.dll",
 }

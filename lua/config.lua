@@ -7,12 +7,10 @@ M.ui = {
 
 M.lazy_setting = {
         root = cat.path.data .. "/lazy",
-        defaults = {
-                lazy = true
-        },
 
         install = {
                 colorscheme = { "gruvbox" }
         },
 }
+
 return M
