@@ -9,6 +9,13 @@ cat.config = {}
 -- combine packages and config to a table
 cat.modules = {}
 
+-- 
+cat.cmd = {}
+
+cat.keys = {}
+
+cat.event = {}
+
 cat.ui = {
         indent = 8,
         colorscheme = "gruvbox"
