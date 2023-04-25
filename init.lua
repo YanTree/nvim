@@ -1,14 +1,11 @@
 require("cat")
 require("init")
 
-local config = require("config")
-local lazypath = cat.path.data .. "/lazy/lazy.nvim"
+local lazy_path = cat.path.data .. "/lazy/lazy.nvim"
 
-if not vim.loop.fs_stat(lazypath) then
-        require("lazy").load_lazy(lazypath)
-        print("not start lazy path")
+if not vim.loop.fs_stat(lazy_path) then
+        require("cat_lazy").load_lazy(lazy_path)
 end
 
-vim.opt.rtp:prepend(lazypath)
-require("lazy").setup(cat.modules, config.lazysetting)
-vim.api.nvim_command("colorscheme " .. config.ui.theme)
+vim.opt.rtp:prepend(lazy_path)
+require("cat_lazy").fire_lazy()

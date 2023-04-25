@@ -9,4 +9,3 @@ cat.packages["rafamadriz/friendly-snippets"] = {
         pin = true,
         commit = "b1b78a6433268fc172adb5a843e165035e83861e",
 }
-

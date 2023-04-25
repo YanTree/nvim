@@ -34,5 +34,3 @@ local config = {
 
 cat.config["ellisonleao/gruvbox.nvim"] = config
 cat.set_options("ellisonleao/gruvbox.nvim")
--- print("ellisonleao/gruvbox.nvim")
-

@@ -1,5 +1,8 @@
-local utils = require("utils")
-local indent = require("config").ui.indent
+----------- leaderkey -------------------------
+vim.g.mapleader = " "
+
+require("cat_mappings")
+local utils = require("cat_utils")
 local opt = vim.opt
 
 utils.create_cache_folder()
@@ -35,9 +38,9 @@ opt.updatetime = 400                       -- faster completion (4000ms default)
 
 opt.smartindent = true                     -- make indenting smarter again
 opt.expandtab = true                       -- convert tabs to spaces
-opt.tabstop = indent                       -- insert 'indent' spaces for a tab
+opt.tabstop = cat.ui.indent             -- insert 'indent' spaces for a tab
 
-opt.shiftwidth = indent                    -- the number of spaces inserted for each indentation
+opt.shiftwidth = cat.ui.indent          -- the number of spaces inserted for each indentation
 
 opt.cursorline = true                      -- hight the current line
 

@@ -1,0 +1,11 @@
+-- cat.keymap[core] = {
+--     n = {
+--         -- Clear highlights
+--         ["<Esc>"] = { ":noh <CR>", "Clear highlights" },
+--         -- switch between windows
+--         ["<C-h>"] = { "<C-w>h", "Move to left window" },
+--         ["<C-l>"] = { "<C-w>l", "Move to right window" },
+--         ["<C-j>"] = { "<C-w>j", "Move to down window" },
+--         ["<C-k>"] = { "<C-w>k", "Move to up window" },
+--     },
+-- }

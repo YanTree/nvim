@@ -19,4 +19,3 @@ cat.packages["MunifTanjim/nui.nvim"] = {
         pin = true,
         commit = "ecd9def93891b9260b15b5fcef542eaabf4145c9",
 }
-

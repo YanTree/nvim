@@ -1,24 +1,18 @@
 cat = {}
 
--- mut
+-- constant, hold all packages
 cat.packages = {}
 
--- constant
+-- constant, hold config for all packages
 cat.config = {}
 
--- combine packages and config
+-- combine packages and config to a table
 cat.modules = {}
 
-cat.set_options = function(name)
-        for index, config in pairs(cat.packages) do
-                if index == name then
-                        cat.modules[#cat.modules+1] = vim.tbl_deep_extend("force", vim.tbl_extend("force", {index}, config), cat.config[name])
-                end
-        end
-
-        return cat.modules
-end
-
+cat.ui = {
+        indent = 8,
+        colorscheme = "gruvbox"
+}
 
 ----------- setting path ------------------
 local home = os.getenv("HOME")
@@ -30,3 +24,14 @@ cat.path = {
         cache = home .. "/.cache/nvim",
         sqlite3 = home .. "/scoop/apps/sqlite/current/sqlite3.dll",
 }
+
+-- functions
+cat.set_options = function(name)
+        for index, config in pairs(cat.packages) do
+                if index == name then
+                        cat.modules[#cat.modules+1] = vim.tbl_deep_extend("force", vim.tbl_extend("force", {index}, config), cat.config[name])
+                end
+        end
+
+        return cat.modules
+end

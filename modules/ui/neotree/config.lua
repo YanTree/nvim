@@ -10,6 +10,9 @@ local config = {
     lazy = true,
     cmd = { "Neotree" },
     dependencies = dependencies,
+
+    keys = {
+    },
   
     init = function()
         vim.g.neo_tree_remove_legacy_commands = 1
@@ -29,6 +32,18 @@ local config = {
                 "filesystem",
                 "buffers",
                 "git_status",
+        },
+        source_selector = {
+                winbar = true,
+                statusline = false, -- toggle to show selector on statusline
+                content_layout = "center",
+                tabs_layout = "equal",
+                tab_labels = {
+                        filesystem = "  ",
+                        buffers = "  ",
+                        git_status = "  ",
+                        diagnostics = " 裂",
+                },
         },
         filesystem = {
                 -- true creates a 2-way binding between vim's cwd and neo-tree's root

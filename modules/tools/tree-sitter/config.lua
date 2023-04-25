@@ -56,4 +56,3 @@ local config = {
 
 cat.config["nvim-treesitter/nvim-treesitter"] = config
 cat.set_options("nvim-treesitter/nvim-treesitter")
-
