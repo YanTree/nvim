@@ -1,3 +1,5 @@
+local lazy_path = cat.path.data .. "/lazy/lazy.nvim"
+
 local lazy_setting = {
         default = {
                 lazy = true,
@@ -13,24 +15,16 @@ local lazy_setting = {
 
 local M = {}
 
-M.echo = function(str)
-  vim.cmd "redraw"
-  vim.api.nvim_echo({ { str, "Bold" } }, true, {})
-end
+M.fire_lazy = function()
+        if not vim.loop.fs_stat(lazy_path) then
+		local lazy_repo = "https://github.com/folke/lazy.nvim.git "
+		vim.api.nvim_command("!git clone --filter=blob:none --branch=stable " .. lazy_repo .. lazy_path)
+        end
 
-M.load_lazy = function(lazy_path)
-        --------- lazy.nvim ---------------
-        M.echo "  Installing lazy.nvim & plugins ..."
-        local repo = "https://github.com/folke/lazy.nvim.git"
-        vim.fn.system { "git", "clone", "--filter=blob:none", "--branch=stable", repo, lazy_path }
 
         vim.opt.rtp:prepend(lazy_path)
-        -- install packages
-        M.fire_lazy()
-end
-
-M.fire_lazy = function()
         require("lazy").setup(cat.modules, lazy_setting)
+
         vim.api.nvim_command("colorscheme " .. cat.ui.colorscheme)
 end
 

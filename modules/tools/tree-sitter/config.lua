@@ -1,22 +1,17 @@
 -- tools/tree-sitter/config.lua
 
-local dependencies = {
-    {"JoosepAlviste/nvim-ts-context-commentstring"},
-    {"mrjones2014/nvim-ts-rainbow"},
-    {"norcalli/nvim-colorizer.lua"},
-}
-
 local config = {
         lazy = true,
         -- last release is way too old and doesn't work on windows
         version = false,
         cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
-        build = ":TSUpdate",
-        event = { "BufRead", "BufWinEnter", "BufNewFile" },
-
-        dependencies = dependencies,
+	build = ":TSUpdate",
+        event = { "BufReadPost", "BufNewFile" },
   
         opts = {
+                --
+                -- treesitter settings
+
                 highlight = {
                         enable = true,
                         disable = function(lang, buf)
@@ -30,6 +25,9 @@ local config = {
                 -- A list of parser names, or "all" (the 13 listed parsers should always be installed)
                 ensure_installed = { "bash", "c", "lua", "vim", "vimdoc", "python", "rust", "wgsl", "wgsl_bevy", "toml", "scheme", "racket", "c_sharp", },
 
+                --
+                -- packages settings
+
                 -- integration with nvim-ts-rainbow plugin
                 rainbow = {
                         enable = true,
@@ -39,6 +37,7 @@ local config = {
                         -- colors = {}, -- table of hex strings
                         -- termcolors = {} -- table of colour name strings
                 },
+
                 -- integration with Comment.nvim plugin
                 context_commentstring = {
                         enable = true,
@@ -47,6 +46,7 @@ local config = {
         },
 
         config = function(_, opts)
+                require("nvim-treesitter.install").prefer_git = true
                 require("nvim-treesitter.configs").setup(opts)
         end,
 }

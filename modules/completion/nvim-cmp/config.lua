@@ -9,7 +9,7 @@ local dependencies = {
         {"hrsh7th/cmp-path"},
         -- completion neovim lua api
         {"hrsh7th/cmp-nvim-lua"},
-        -- bridge of luasnip engine and cmp
+        -- bridge of luasnip(engine) and nvim-cmp
         { "saadparwaiz1/cmp_luasnip" },
         {
                 -- snippet engine
@@ -36,6 +36,9 @@ local config = {
                 end
 
                 return {
+                        --
+                        -- nvim-cmp settings
+
                         completion = {
                                 completeopt = "menu,menuone,noinsert",
                         },
@@ -96,6 +99,10 @@ local config = {
                                 -- completion file directory(cmp-path plugin)
                                 { name = "path"},
                         },
+
+                        --
+                        -- packages settings
+ 
                         -- integration nvim-cmp with luasnip(engine) through cmp_luasnip
                         snippet = {
                                 expand = function(args)

@@ -58,6 +58,7 @@ opt.termguicolors = true                   -- set term gui colors (most terminal
 opt.foldenable = true                      -- default not fold code 
 opt.foldlevelstart = 99                    -- 
 
+require("cat_lazy").fire_lazy()
 -- print(print(vim.inspect(cat.packages)))
 -- print(print(vim.inspect(cat.config)))
 
