@@ -3,7 +3,6 @@
 local config = {
         lazy = false,
 
-
         opts = {
                 undercurl = true,
                 underline = true,
