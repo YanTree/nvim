@@ -1,7 +1,6 @@
 ----------- leaderkey -------------------------
 vim.g.mapleader = " "
 
-require("cat_mappings")
 local utils = require("cat_utils")
 local opt = vim.opt
 
@@ -59,10 +58,3 @@ opt.foldenable = true                      -- default not fold code
 opt.foldlevelstart = 99                    -- 
 
 require("cat_lazy").fire_lazy()
--- print(print(vim.inspect(cat.packages)))
--- print(print(vim.inspect(cat.config)))
-
--- for name, config in pairs(cat.packages) do
---         print(vim.inspect(name))
---         print(vim.inspect(config))
--- end
