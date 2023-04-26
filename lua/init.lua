@@ -1,5 +1,7 @@
 ----------- leaderkey -------------------------
 vim.g.mapleader = " "
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 local utils = require("cat_utils")
 local opt = vim.opt
@@ -20,7 +22,7 @@ opt.mouse = "a"                            -- mouse will alway available in neov
 opt.clipboard = "unnamedplus"              -- neovim avabile access the system clipboard
 opt.signcolumn = "yes"                     -- always show the sign column, otherwise it would shift the text each time
 opt.completeopt = { "menuone", "noselect" }-- mostly just for cmp
-opt.showtabline = 2                        -- never show tabline on top left corner (2: always, 1: leaset two tabs pages, 0: never)
+-- opt.showtabline = 2                        -- never show tabline on top left corner (2: always, 1: leaset two tabs pages, 0: never)
 -- opt.laststatus = 1                         -- TODO:
 opt.conceallevel = 0                       -- so that `` is visible in markdown files
 opt.swapfile = false                       -- disable to creates a swapfile
