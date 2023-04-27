@@ -1,0 +1,86 @@
+-- tools/telescope/config.lua
+
+local dependencies = {
+        { "nvim-lua/plenary.nvim" },
+        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }, 
+        { "nvim-telescope/telescope-project.nvim" }, 
+}
+
+local config = {
+        lazy = true,
+        cmd = "Telescope",
+        dependencies = dependencies,
+
+        opts = function()
+	local actions = require("telescope.actions")
+	
+	return {
+                defaults = {
+                        prompt_prefix = " ",
+                        selection_caret = " ",
+                        sorting_strategy = "ascending",
+                        layout_strategy = "bottom_pane",
+                        borderchars = {
+                                { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
+                                prompt = {"─", "│", " ", "│", '┌', '┐', "│", "│"},
+                                results = {"─", "│", "─", "│", "├", "┤", "┘", "└"},
+                                preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
+                        },
+                        layout_config = {
+                                anchor = "N",
+                                prompt_position = "top",
+                                height = 0.88,
+                        },
+                        -- key binddings
+                        mappings = {
+                                i = {
+                                        ["<C-j>"] = actions.move_selection_next,
+                                        ["<C-k>"] = actions.move_selection_previous,
+
+                                        ["<C-e>"] = actions.close,
+
+                                        ["<Down>"] = actions.move_selection_next,
+                                        ["<Up>"] = actions.move_selection_previous,
+                                },
+                        },
+                },
+                pickers = {
+                        find_files = {
+                                previewer = false,
+                        },
+                },
+                extensions = {
+                        fzf = {
+                                fuzzy = true,                   -- false will only do exact matching
+                                override_generic_sorter = true, -- override the generic sorter
+                                override_file_sorter = true,    -- overider the file sorter
+                                case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+                        },
+                        project = {
+                                base_dirs = {
+                                        "~/.config/",
+                                        "~/Library/",
+                                        "~/.doom.d/",
+                                },
+                                hidden_files = false,
+                                theme = "ivy",
+                                order_by = "recent", -- "asc", "desc"
+                                search_by = "title", -- "title", "path"
+                                sync_with_nvim_tree = true,
+                        },
+                },
+        }
+	end,
+
+        config = function(_, opts)
+                local telescope = require("telescope")
+                telescope.setup(opts)
+
+                -- telescope extensions
+                telescope.load_extension("fzf")
+                telescope.load_extension("project")
+        end,
+}
+
+cat.config["nvim-telescope/telescope.nvim"] = config
+cat.set_options("nvim-telescope/telescope.nvim")

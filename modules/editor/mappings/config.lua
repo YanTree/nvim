@@ -33,11 +33,15 @@ maps.n["<C-Right>"]     = { "<cmd>vertical resize +2<CR>",  desc = "Resize split
 -- packages
 --
 -- nvim-tree
-maps.n["<leader>op"]     = { "<cmd>NvimTreeToggle<CR>",  desc = "Open files tree" }
+maps.n["<leader>op"]     = { "<cmd>NvimTreeToggle<CR>",  desc = "Toggle nvim-tree" }
 
 -- telescope
-maps.n["<leader>ff"]     = { "<cmd>Telescope find_files<CR>",  desc = "Search files" }
+maps.n["<leader>ff"]     = { "<cmd>Telescope find_files<CR>",  desc = "Find file in project" }
+maps.n["<leader>fg"]     = { "<cmd>Telescope git_files<CR>",  desc = "Find file in git" }
+maps.n["<leader>fr"]     = { "<cmd>Telescope oldfiles<CR>",  desc = "Recent files" }
 maps.n["<leader>bb"]     = { "<cmd>Telescope buffers<CR>",  desc = "Search buffers" }
+maps.n["<leader>pp"]     = { "<cmd>Telescope project<CR>",  desc = "Switch project" }
+maps.n["<leader>sd"]     = { "<cmd>Telescope grep_string<CR>",  desc = "Search current project" }
 
 cat.mappings = maps
 cat.set_mappings(maps)
