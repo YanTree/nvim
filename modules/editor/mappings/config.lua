@@ -30,6 +30,15 @@ maps.n["<C-Down>"]      = { "<cmd>resize +2<CR>",           desc = "Resize split
 maps.n["<C-Left>"]      = { "<cmd>vertical resize -2<CR>",  desc = "Resize split left" }
 maps.n["<C-Right>"]     = { "<cmd>vertical resize +2<CR>",  desc = "Resize split right" }
 
+-- packages
+--
+-- nvim-tree
+maps.n["<leader>op"]     = { "<cmd>NvimTreeToggle<CR>",  desc = "Open files tree" }
+
+-- telescope
+maps.n["<leader>ff"]     = { "<cmd>Telescope find_files<CR>",  desc = "Search files" }
+maps.n["<leader>bb"]     = { "<cmd>Telescope buffers<CR>",  desc = "Search buffers" }
+
 cat.mappings = maps
 cat.set_mappings(maps)
 
