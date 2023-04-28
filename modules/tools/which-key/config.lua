@@ -1,4 +1,4 @@
--- tools/which-key/config.lua
+--uffer tools/which-key/config.lua
 
 local config = {
         lazy = true,
@@ -6,12 +6,22 @@ local config = {
   
         opts = {
                 plugins = { spelling = true },
+                sections = {
+                        mode = { "n", "v" },
+                        ["<leader>f"] = { name = "+File"},
+                        ["<leader>w"]= { name = "+Window"},
+                        ["<leader>s"] = { name = "+Search"},
+                        ["<leader>g"] = { name = "+Git"},
+                        ["<leader>b"] = { name = "+Buffer"},
+                        ["<leader>p"] = { name = "+Project"},
+                        ["<leader>o"] = { name = "+Open"},
+                },
         },
 
         config = function(_, opts)
                 local wk = require("which-key")
                 wk.setup(opts)
-                -- wk.register(opts.defaults)
+                wk.register(opts.sections)
         end,
 }
 
