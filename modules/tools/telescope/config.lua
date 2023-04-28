@@ -58,6 +58,9 @@ local config = {
                         find_files = {
                                 previewer = false,
                         },
+                        buffers = {
+                                previewer = false,
+                        },
                 },
                 extensions = {
                         fzf = {
