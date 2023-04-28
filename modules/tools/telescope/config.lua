@@ -26,7 +26,6 @@ local config = {
 
 	return {
                 defaults = {
-                        prompt_prefix = " ",
                         selection_caret = " ",
                         sorting_strategy = "ascending",
                         layout_strategy = "horizontal_merged",
@@ -56,10 +55,28 @@ local config = {
                 },
                 pickers = {
                         find_files = {
+                                prompt_prefix = " Files " .. " ",
                                 previewer = false,
                         },
                         buffers = {
+                                prompt_prefix = " Buffers " .. " ",
                                 previewer = false,
+                        },
+                        git_files = {
+                                prompt_prefix = " Git files " .. " ",
+                                -- previewer = false,
+                        },
+                        oldfiles = {
+                                prompt_prefix = " Recent files " .. " ",
+                                previewer = false,
+                        },
+                        project = {
+                                prompt_prefix = " Projects " .. " ",
+                                previewer = false,
+                        },
+                        grep_string = {
+                                prompt_prefix = " Grep string " .. " ",
+                                -- previewer = false,
                         },
                 },
                 extensions = {
