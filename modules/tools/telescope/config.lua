@@ -71,6 +71,10 @@ local config = {
                                         "~/.config/",
                                         "~/Library/",
                                         "~/.doom.d/",
+
+                                        -- windows
+                                        "~/AppData/Local/",
+                                        "~/AppData/Roaming/",
                                 },
                                 hidden_files = false,
                                 theme = "ivy",
