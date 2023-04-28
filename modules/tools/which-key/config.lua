@@ -1,4 +1,4 @@
---uffer tools/which-key/config.lua
+-- tools/which-key/config.lua
 
 local config = {
         lazy = true,
