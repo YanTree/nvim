@@ -13,23 +13,33 @@ local config = {
 
         opts = function()
 	local actions = require("telescope.actions")
-	
+
+        require('telescope.pickers.layout_strategies').horizontal_merged = function(picker, max_columns, max_lines, layout_config)
+                local layout = require('telescope.pickers.layout_strategies').horizontal(picker, max_columns, max_lines, layout_config)
+                layout.results.line = layout.results.line - 1
+                layout.results.height = layout.results.height + 1
+                layout.results.title = ''
+                layout.prompt.title = ''
+                -- layout.preview.title = ''
+	        return layout
+        end
+
 	return {
                 defaults = {
                         prompt_prefix = " ",
                         selection_caret = " ",
                         sorting_strategy = "ascending",
-                        layout_strategy = "bottom_pane",
+                        layout_strategy = "horizontal_merged",
                         borderchars = {
-                                { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
+                        { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
                                 prompt = {"─", "│", " ", "│", '┌', '┐', "│", "│"},
                                 results = {"─", "│", "─", "│", "├", "┤", "┘", "└"},
                                 preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
                         },
                         layout_config = {
-                                anchor = "N",
+                                anchor = "S",
                                 prompt_position = "top",
-                                height = 0.88,
+                                height = 0.7,
                         },
                         -- key binddings
                         mappings = {
