@@ -1,9 +1,32 @@
 {
-    "require": {
-        "prefix": "req",
+    "packages": {
+        "prefix": "pack",
         "body": [
-            "require(\"${1:module}\")"
+            "-- ${1:sort}/${2:name}/packages.lua\n",
+            "cat.packages[\"${3:repository}\"] = {",
+            "\tpin = true,",
+            "\tcommit = \"${4:sha-hvalue}\",",
+            "}\n"
         ],
-        "description": "Require module"
+        "description": "Template of create config file"
+    },
+    "config": {
+        "prefix": "conf",
+        "body": [
+            "-- ${1:sort}/${2:name}/config.lua\n",
+            "local config = {",
+            "\tlazy = true,",
+            "\tcmd = { \"\" },",
+            "\tevent = { \"BufReadPre\" },",
+            "\topts = {",
+            "\t},",
+            "\tconfig = function(_, opts)",
+            "\t\trequire(\"\").setup(opts)",
+            "end,",
+            "}\n",
+            "cat.config[\"\"] = config",
+            "cat.set_options(\"\")\n"
+        ],
+        "description": "Template of create config file"
     }
 }
