@@ -59,4 +59,8 @@ opt.termguicolors = true                   -- set term gui colors (most terminal
 opt.foldenable = true                      -- default not fold code 
 opt.foldlevelstart = 99                    -- 
 
+
+----------- options -------------------------
+vim.filetype.add({extension = { wgsl = "wgsl"}})
+
 require("cat_lazy").fire_lazy()
