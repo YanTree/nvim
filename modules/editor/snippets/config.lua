@@ -11,6 +11,11 @@ local config = {
         dependencies = dependencies,
 
         opts = function()
+                -- load custom snippets
+                if not vim.tbl_contains(vim.opt.rtp:get(), cat.path.snippets) then
+                        vim.opt.rtp:append(cat.path.snippets)
+                end
+
                 require("luasnip.loaders.from_vscode").lazy_load()
                 return {
                         history = true,

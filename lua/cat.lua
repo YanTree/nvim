@@ -31,6 +31,7 @@ cat.path = {
         home = home,
         config = vim.fn.stdpath("config"),
         modules = vim.fn.stdpath("config") .. "/modules",
+        snippets = vim.fn.stdpath("config") .. "/snippets",
         data = string.format("%s/catsite/", vim.fn.stdpath("data")),
         cache = home .. "/.cache/nvim",
         sqlite3 = home .. "/scoop/apps/sqlite/current/sqlite3.dll",
