@@ -21,6 +21,12 @@ M.dofile_modules_config = function()
         M.modules_dofile(config_list)
 end
 
+M.dofile_modules_servers = function()
+        -- return a list with all servers_list files under 'modules_path' directory
+        local servers_list = vim.split(vim.fn.glob(cat.path.modules .. "/lang/*/lsp.lua"), "\n")
+        M.modules_dofile(servers_list)
+end
+
 M.create_cache_folder = function()
         -- code
         local folder_list = {
