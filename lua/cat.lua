@@ -25,6 +25,13 @@ cat.ui = {
         colorscheme = "gruvbox"
 }
 
+cat.lspservers = {
+        "lua_ls",
+        "rust_analyzer",
+        "wgsl_analyzer",
+        -- "csharp_ls",
+}
+
 ----------- setting path ------------------
 local home = os.getenv("HOME")
 cat.path = {
@@ -48,7 +55,7 @@ cat.set_options = function(name)
         return cat.modules
 end
 
-cat.set_mappings = function(map_tbl, wk_queue)
+cat.set_mappings = function(map_tbl)
         -- iterate over the first keys for each mode
         for mode, maps in pairs(map_tbl) do
                 -- iterate over each keybinding set in the current mode
@@ -62,13 +69,6 @@ cat.set_mappings = function(map_tbl, wk_queue)
                                 map_opts = vim.tbl_deep_extend("force", map_opts, options)
                                 map_opts[1] = nil
                         end
-
-                        -- add keybinding to which-key package
-                        -- if not cmd or map_opts then
-                        --         if not wk_queue then wk_queue = {} end
-                        --         if not wk_queue[mode] then wk_queue[mode] = {} end
-                        --         wk_queue[mode][keymap] = map_opts
-                        -- end
 
                         vim.keymap.set(mode, keymap, cmd, map_opts)
                 end
