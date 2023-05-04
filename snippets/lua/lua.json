@@ -22,7 +22,7 @@
             "\t},",
             "\tconfig = function(_, opts)",
             "\t\trequire(\"\").setup(opts)",
-            "end,",
+            "\tend,",
             "}\n",
             "cat.config[\"\"] = config",
             "cat.set_options(\"\")\n"
