@@ -1,6 +1,18 @@
 --tools/gitsigns/config.lua
 
-local config = {
+local dependencies = { "nvim-lua/plenary.nvim" }
+
+local neogit_config = {
+        lazy = true,
+        dependencies = dependencies,
+        cmd = { "Neogit" },
+        opts = {},
+        config = function(_, opts)
+                require("neogit").setup(opts)
+        end
+}
+
+local gitsigns_config = {
         lazy = true,
         ft = "gitcommit",
         init = function()
@@ -25,5 +37,7 @@ local config = {
         end,
 }
 
-cat.config["lewis6991/gitsigns.nvim"] = config
+cat.config["TimUntersberger/neogit"] = neogit_config
+cat.config["lewis6991/gitsigns.nvim"] = gitsigns_config
+cat.set_options("TimUntersberger/neogit")
 cat.set_options("lewis6991/gitsigns.nvim")
