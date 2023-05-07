@@ -3,9 +3,24 @@
 local mason_config = {
         lazy = true,
         cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
-        opts = {
+        opts = function()
+                local icons = {
+                        ui = cat.get_icon("ui", true),
+                        misc = cat.get_icon("misc", true),
+                }
 
-        },
+                -- code
+                return {
+                        ui = {
+                                icons = {
+                                        package_pending = icons.ui.ModifiedAlt,
+                                        package_installed = icons.ui.Check,
+                                        package_uninstalled = icons.misc.Ghost,
+                                },
+                        },
+        }
+        end,
+
         config = function(_, opts)
                 require("mason").setup(opts)
         end,
