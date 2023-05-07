@@ -28,6 +28,11 @@ local config = {
         opts = function()
                 local cmp = require("cmp")
                 local luasnip = require("luasnip")
+                local icons = {
+                        kind = cat.get_icon("kind"),
+                        type = cat.get_icon("type"),
+                        cmp = cat.get_icon("cmp"),
+                }
 
                 -- local function
                 local function has_words_before()
@@ -35,12 +40,60 @@ local config = {
                         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
                 end
 
+                local function cmp_format(opts)
+                        opts = opts or {}
+
+                        return function(entry, vim_item)
+                                if opts.before then
+                                        vim_item = opts.before(entry, vim_item)
+                                end
+
+                                local kind_symbol = opts.symbol_map[vim_item.kind] or icons.kind.Undefined
+                                local source_symbol = opts.symbol_map[entry.source.name] or icons.cmp.Undefined
+
+                                vim_item.menu = " " .. source_symbol
+                                vim_item.kind = string.format("  「%s %s」", kind_symbol, vim_item.kind)
+
+                                if opts.maxwidth ~= nil then
+                                        if opts.ellipsis_char == nil then
+                                                vim_item.abbr = string.sub(vim_item.abbr, 1, opts.maxwidth)
+                                        else
+                                                local label = vim_item.abbr
+                                                local truncated_label = vim.fn.strcharpart(label, 0, opts.maxwidth)
+                                                if truncated_label ~= label then
+                                                        vim_item.abbr = truncated_label .. opts.ellipsis_char
+                                                end
+                                        end
+                                end
+                                return vim_item
+                        end
+                end
+
                 return {
                         --
                         -- nvim-cmp settings
-
+                        window = {
+                                completion = cmp.config.window.bordered({
+                                        border = cat.border.solid_line,
+                                }),
+                                documentation = cmp.config.window.bordered({
+                                        border = cat.border.dot_line,
+                                })
+                        },
                         completion = {
                                 completeopt = "menu,menuone,noinsert",
+                        },
+                        formatting = {
+                                -- item.kind icons + compeltion word + item.kind type 
+                                field = { "menu", "abbr", "kind" },
+                                format = function(entry, vim_item)
+                                        local kind_map = vim.tbl_deep_extend("force", icons.kind, icons.type, icons.cmp)
+                                        local kind = cmp_format({
+                                                maxwidth = 50,
+                                                symbol_map = kind_map,
+                                        })(entry, vim_item)
+                                        return kind
+                                end,
                         },
                         -- customize keymap on active pop window of completion
                         mapping = cmp.mapping.preset.insert({
@@ -102,7 +155,7 @@ local config = {
 
                         --
                         -- packages settings
- 
+
                         -- integration nvim-cmp with luasnip(engine) through cmp_luasnip
                         snippet = {
                                 expand = function(args)

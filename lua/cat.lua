@@ -12,17 +12,17 @@ cat.modules = {}
 -- constant, hold all keybinding
 cat.mappings = {}
 
--- constant, hold all property of lazy.nvim package
-cat.cmd = {}
-
-cat.keys = {}
-
-cat.event = {}
+-- constant, hold all icons
+cat.icons = {}
 
 -- constant 
 cat.ui = {
         indent = 8,
-        colorscheme = "gruvbox"
+        colorscheme = "gruvbox",
+}
+cat.border = {
+        solid_line = { '┌', '─', '┐', '│', '┘', '─', '└', '│'},
+        dot_line = { '+', '-', '+', '¦', '+', '-', '+', '¦'},
 }
 
 cat.lspservers = {
@@ -44,7 +44,7 @@ cat.path = {
         sqlite3 = home .. "/scoop/apps/sqlite/current/sqlite3.dll",
 }
 
--- functions
+----------- functions ------------------
 cat.set_options = function(name)
         for index, config in pairs(cat.packages) do
                 if index == name then
@@ -72,5 +72,20 @@ cat.set_mappings = function(map_tbl)
 
                         vim.keymap.set(mode, keymap, cmd, map_opts)
                 end
+        end
+end
+
+---Get a specific icon set.
+---@param category "kind"|"type"|"documents"|"git"|"ui"|"diagnostics"|"misc"|"cmp"|"dap"
+---@param add_space? boolean @Add trailing space after the icon.
+cat.get_icon = function(category, add_space)
+        if add_space then
+                return setmetatable({}, {
+                        __index = function(_, key)
+                                return cat.icons[category][key] .. " "
+                        end,
+                })
+        else
+                return cat.icons[category]
         end
 end
