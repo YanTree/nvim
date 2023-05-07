@@ -30,6 +30,11 @@ local icons = {
                 Unit = "",
                 Value = "",
                 Variable = "",
+		-- ccls-specific icons.
+		TypeAlias = "",
+		Parameter = "",
+		StaticMethod = "",
+		Macro = "",
         },
         type = {
                 Array = "",
