@@ -52,7 +52,7 @@ local config = {
                                 local source_symbol = opts.symbol_map[entry.source.name] or icons.cmp.Undefined
 
                                 vim_item.menu = " " .. source_symbol
-                                vim_item.kind = string.format("  「%s %s」", kind_symbol, vim_item.kind)
+                                vim_item.kind = string.format("  %s %s", kind_symbol, vim_item.kind)
 
                                 if opts.maxwidth ~= nil then
                                         if opts.ellipsis_char == nil then
@@ -73,12 +73,14 @@ local config = {
                         --
                         -- nvim-cmp settings
                         window = {
-                                completion = cmp.config.window.bordered({
-                                        border = cat.border.solid_line,
-                                }),
-                                documentation = cmp.config.window.bordered({
+                                completion = {
+                                        -- col_offset = -3,
+                                        side_padding = 1,
+                                        -- border = cat.border.solid_line,
+                                },
+                                documentation = {
                                         border = cat.border.dot_line,
-                                })
+                                },
                         },
                         completion = {
                                 completeopt = "menu,menuone,noinsert",
