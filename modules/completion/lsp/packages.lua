@@ -14,3 +14,9 @@ cat.packages["neovim/nvim-lspconfig"] = {
         pin = true,
         commit = "427378a03ffc1e1bc023275583a49b1993e524d0",
 }
+
+cat.packages["nvimdev/lspsaga.nvim"] = {
+        pin = true,
+        commit = "76696bed4397c3b58563c246dc1f7856ed4af023",
+}
+
