@@ -1,2 +1,6 @@
-lua/modules/plugins/custom.lua
-lua/modules/configs/custom
+/lua/core
+/lua/plugins
+coc-settings.json
+.luarc.json
+lazy-lock.json
+**/.DS_Store

@@ -1,64 +1,115 @@
--- local variable
-local const = require("core.const")
-local settings = require("core.settings")
+local opt = vim.opt
+local g = vim.g
+local config = require("core.utils").load_config()
 
--- Create cache dir and data dirs
-local createdir = function()
-        local data_dir = {
-                const.cache_dir .. "backup",
-                const.cache_dir .. "session",
-                const.cache_dir .. "swap",
-                const.cache_dir .. "tags",
-                const.cache_dir .. "undo",
-        }
+-------------------------------------- globals -----------------------------------------
+g.nvchad_theme = config.ui.theme
+g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
+g.toggle_theme_icon = "   "
+g.transparency = config.ui.transparency
 
-        -- Only check whether cache_dir exists, this would be enough
-        if vim.fn.isdirectory(const.cache_dir) == 0 then
-                os.execute("mkdir - p " .. const.cache_dir)
-                for _, v in pairs(data_dir) do
-                        if vim.fn.isdirectory(v) == 0 then
-                                os.execute("mkdir -p " .. v)
-                        end
-                end
-        end
+-------------------------------------- options ------------------------------------------
+opt.laststatus = 3 -- global statusline
+opt.showmode = false
+
+opt.clipboard = "unnamedplus"
+opt.cursorline = true
+
+-- Indenting
+opt.expandtab = true
+opt.shiftwidth = 2
+opt.smartindent = true
+opt.tabstop = 2
+opt.softtabstop = 2
+
+opt.fillchars = { eob = " " }
+opt.ignorecase = true
+opt.smartcase = true
+opt.mouse = "a"
+
+-- Numbers
+opt.number = true
+opt.numberwidth = 2
+opt.ruler = false
+
+-- disable nvim intro
+opt.shortmess:append "sI"
+
+opt.signcolumn = "yes"
+opt.splitbelow = true
+opt.splitright = true
+opt.termguicolors = true
+opt.timeoutlen = 400
+opt.undofile = true
+
+-- interval for writing swap file to disk, also used by gitsigns
+opt.updatetime = 250
+
+-- go to previous/next line with h,l,left arrow and right arrow
+-- when cursor reaches end/beginning of line
+opt.whichwrap:append "<>[]hl"
+
+g.mapleader = " "
+
+-- disable some default providers
+for _, provider in ipairs { "node", "perl", "python3", "ruby" } do
+  vim.g["loaded_" .. provider .. "_provider"] = 0
 end
 
-local leader_map = function()
-        -- setting 'space' key as Leader key
-        vim.g.mapleader = " "
-end
+-- add binaries installed by mason.nvim to path
+local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
+vim.env.PATH = vim.fn.stdpath "data" .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
 
-local disable_distribution_plugins = function()
-        -- disable netrw at the very start, use nvim-tree instead 
-        vim.g.loaded_netrw = 1
-        vim.g.loaded_netrwPlugin = 1
-end
+-------------------------------------- autocmds ------------------------------------------
+local autocmd = vim.api.nvim_create_autocmd
 
-local load_core = function()
-        -- font setting for GUI version
-        vim.api.nvim_set_option_value("guifont", settings.font, {})
+-- dont list quickfix buffers
+autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.opt_local.buflisted = false
+  end,
+})
 
-        -- create dir to put nvim data file
-        createdir()
-        -- disable few setting on init
-        disable_distribution_plugins()
-        -- setting about leader map
-        leader_map()
+-- reload some chadrc options on-save
+autocmd("BufWritePost", {
+  pattern = vim.tbl_map(function(path)
+    return vim.fs.normalize(vim.loop.fs_realpath(path))
+  end, vim.fn.glob(vim.fn.stdpath "config" .. "/lua/custom/**/*.lua", true, true, true)),
+  group = vim.api.nvim_create_augroup("ReloadNvChad", {}),
 
-        -- import nvim options(eg: cursorline = true) setting
-        require("core.options")
-        -- import nvim key bindding(eg: resize window) setting without third plugin
-        require("core.mapping")
-        -- import folder of keymap, put all third plugin(eg: telescope) key bindding setting
-        require("keymap")
-        -- heart of config, third plugin 'lazy.nvim'. one manager to handle all third plugins
-        require("core.lazy")
+  callback = function(opts)
+    local fp = vim.fn.fnamemodify(vim.fs.normalize(vim.api.nvim_buf_get_name(opts.buf)), ":r") --[[@as string]]
+    local app_name = vim.env.NVIM_APPNAME and vim.env.NVIM_APPNAME or "nvim"
+    local module = string.gsub(fp, "^.*/" .. app_name .. "/lua/", ""):gsub("/", ".")
 
-        -- get colorscheme from settings file
-        local colorscheme = settings.colorscheme
-        -- apply colorscheme from settings file
-        vim.api.nvim_command("colorscheme " .. colorscheme)
-end
+    require("plenary.reload").reload_module "base46"
+    require("plenary.reload").reload_module(module)
+    require("plenary.reload").reload_module "custom.chadrc"
 
--- fire core setting
-load_core()
+    config = require("core.utils").load_config()
+
+    vim.g.nvchad_theme = config.ui.theme
+    vim.g.transparency = config.ui.transparency
+
+    -- statusline
+    require("plenary.reload").reload_module("nvchad.statusline." .. config.ui.statusline.theme)
+    vim.opt.statusline = "%!v:lua.require('nvchad.statusline." .. config.ui.statusline.theme .. "').run()"
+
+    -- tabufline
+    if config.ui.tabufline.enabled then
+      require("plenary.reload").reload_module "nvchad.tabufline.modules"
+      vim.opt.tabline = "%!v:lua.require('nvchad.tabufline.modules').run()"
+    end
+
+    require("base46").load_all_highlights()
+    -- vim.cmd("redraw!")
+  end,
+})
+
+-------------------------------------- commands ------------------------------------------
+local new_cmd = vim.api.nvim_create_user_command
+
+new_cmd("NvChadUpdate", function()
+  require "nvchad.updater"()
+end, {})
